@@ -1,6 +1,6 @@
 # secure-programming
 
-This repository contains simple programs created in the Secure Programming course as independent course exercises. Each simple program demonstrates specific security concepts and vulnerabilities, organized into distinct sections.
+This repository contains programs created in the Secure Programming course as independent course exercises. Each simple program demonstrates specific security concepts and vulnerabilities, organized into distinct sections.
 
 ## Sections
 
@@ -23,5 +23,14 @@ This section covers secure cryptographic operations and authentication mechanism
 - **t2.c**: A program that writes cryptographically secure random data to a file.
 - **t3.c**: A program for user authentication using a username and password. Password hashes are stored in a file.
 - **t4.c**: A program to encrypt and decrypt files.
+
+---
+
+### 3. Core Dump Files and File Filtering
+
+This section handles core dump files and disabling them as well as filtering out unwanted characters from files.
+
+- **t3.c**: A program with that prevents core dump files apppearing.
+- **t4.c**: A program that reads a file and filters all characters except letter’s, numbers, commas and hyphen and prints the result on the screen.
 
 ---

@@ -1,6 +1,6 @@
 # secure-programming
 
-This repository contains programs created in the Secure Programming course as independent course exercises. Each simple program demonstrates specific security concepts and vulnerabilities, organized into distinct sections.
+This repository contains programs created in the Secure Programming course as independent course exercises. Each simple program demonstrates specific security concepts and/or vulnerabilities, organized into distinct sections.
 
 ## Sections
 
@@ -32,5 +32,14 @@ This section handles core dump files and disabling them as well as filtering out
 
 - **t3.c**: A program with that prevents core dump files apppearing.
 - **t4.c**: A program that reads a file and filters all characters except letter’s, numbers, commas and hyphen and prints the result on the screen.
+
+---
+
+### 4. File Mixing and Error Handling
+
+This section handles errors related to files as well as underflowing or overflowing numbers.
+
+- **t4.cpp**: A program that mixes two files row by row: first row from the other, second from the other and so on while checking for possible errors and throwing exceptions with appropriate messages for each case.
+- **t5.cpp**: A command line interface calculator program that checks for possible underflow, overflow, and division by zero errors and throws exceptions with appropriate messages for each case.
 
 ---

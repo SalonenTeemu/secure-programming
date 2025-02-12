@@ -1,8 +1,8 @@
 /*
- * This is a basic calculator program that performs basic arithmetic operations (+, -, *, /).
+ * This is a simple calculator program that performs basic arithmetic operations (+, -, *, /).
  * The program tries to take care of possible underflow, overflow, and division by zero errors.
  * The program throws exceptions with appropriate messages for each case.
- * Example input: 1e+100 * 2 = 2e+100
+ * Example input: 1e+100 * 2 = 2e+100 and 2e+307 * 2e+307 = Overflow error
  *
  * References:
  *  - std::numeric_limits: https://en.cppreference.com/w/cpp/types/numeric_limits
@@ -20,19 +20,19 @@
 using namespace std;
 
 // Constants for input range limits
-const long double INPUT_MIN = -numeric_limits<long double>::max();
-const long double INPUT_MAX = numeric_limits<long double>::max();
-const long double INPUT_MIN_POSITIVE = numeric_limits<long double>::min();
+const double INPUT_MIN = -numeric_limits<double>::max();
+const double INPUT_MAX = numeric_limits<double>::max();
+const double INPUT_MIN_POSITIVE = numeric_limits<double>::min();
 
 // Function to check if the number is smaller than the minimum allowed positive value
-void checkSmallValue(long double num) {
+void checkSmallValue(double num) {
     if (num < INPUT_MIN_POSITIVE && num > 0) {
         throw invalid_argument("Error: Input is smaller than the minimum positive value.");
     }
 }
 
 // Function to add two numbers and check for overflow
-long double safeAddition(long double num1, long double num2) {
+double safeAddition(double num1, double num2) {
     if (num2 > 0 && num1 > INPUT_MAX - num2 || num2 < 0 && num1 < INPUT_MIN - num2) {
         throw overflow_error("Error: Overflow occurred during addition.");
     }
@@ -40,7 +40,7 @@ long double safeAddition(long double num1, long double num2) {
 }
 
 // Function to subtract two numbers and check for overflow
-long double safeSubtraction(long double num1, long double num2) {
+double safeSubtraction(double num1, double num2) {
     if (num2 > 0 && num1 < INPUT_MIN + num2 || num2 < 0 && num1 > INPUT_MAX + num2) {
         throw overflow_error("Error: Overflow occurred during subtraction.");
     }
@@ -48,7 +48,7 @@ long double safeSubtraction(long double num1, long double num2) {
 }
 
 // Function to multiply two numbers and check for overflow
-long double safeMultiplication(long double num1, long double num2) {
+double safeMultiplication(double num1, double num2) {
     if (num1 > 0 && num2 > 0) {
         if (num1 > INPUT_MAX / num2) {
             throw overflow_error("Error: Overflow occurred during multiplication.");
@@ -66,7 +66,7 @@ long double safeMultiplication(long double num1, long double num2) {
 }
 
 // Function to divide two numbers and check for division by zero
-long double safeDivision(long double num1, long double num2) {
+double safeDivision(double num1, double num2) {
     if (num2 == 0) {
         throw invalid_argument("Error: Division by zero is not allowed.");
     }
@@ -78,18 +78,15 @@ long double safeDivision(long double num1, long double num2) {
 }
 
 // Function to validate input within the allowed range
-long double getNumberInput() {
-    long double num;
+double getNumberInput() {
+    double num;
     while (true) {
         cin >> num;
         // Check if input is a valid number
         if (cin.fail()) {
             cin.clear();                                          // Clear error flags
             cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Discard invalid input
-            cout << "Invalid input. Please enter a valid number: ";
-        } else if (num < INPUT_MIN || num > INPUT_MAX) {
-            cout << "Error: Input exceeds the allowed range (" << INPUT_MIN
-                 << " to " << INPUT_MAX << "). Try again: ";
+            cout << "Invalid input. The number must be between " << INPUT_MIN << " and " << INPUT_MAX << ". Please enter a valid number: ";
         } else {
             // Check if the number is smaller than the minimum allowed positive value
             try {
@@ -124,7 +121,7 @@ char getOperationInput() {
 }
 
 int main() {
-    long double num1, num2;
+    double num1, num2;
     char operation;
 
     cout << "Enter the first number: ";
@@ -137,7 +134,7 @@ int main() {
     num2 = getNumberInput();
 
     try {
-        long double result;
+        double result;
         switch (operation) {
             case '+': {
                 result = safeAddition(num1, num2);
